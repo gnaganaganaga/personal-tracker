@@ -1,0 +1,10 @@
+my-tracker-app/
+│
+├── index.js          # Main backend code (server and routes)
+├── db/
+│   └── schema.sql    # SQL file for database tables
+├── views/
+│   └── index.html    # Frontend UI
+├── .env              # Environment variables (database URL)
+├── package.json      # Project dependencies (Node.js packages)
+└── README.md         # (optional) Documentation for your project
