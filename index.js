@@ -1,66 +1,72 @@
-require("dotenv").config();
-const express = require("express");
-const bodyParser = require("body-parser");
-const { Pool } = require("pg");
-const cors = require("cors");
+const express = require('express');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const path = require('path');
+const pg = require('pg');
+require('dotenv').config();
+
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-// Set up middleware
-app.use(cors());
-app.use(bodyParser.json());
-
-// Database connection
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+// PostgreSQL connection setup
+const pool = new pg.Pool({
+  connectionString: process.env.DATABASE_URL, // Using the DATABASE_URL from .env file
+  ssl: { rejectUnauthorized: false },
 });
 
-// Authentication routes (login/signup)
-app.post("/auth/login", async (req, res) => {
-  const { username, password } = req.body;
-  const result = await pool.query("SELECT * FROM users WHERE username=$1 AND password=$2", [username, password]);
-  if (result.rows.length > 0) {
-    res.send("Login successful!");
-  } else {
-    res.send("Invalid username or password.");
+// Middlewares
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(session({
+  secret: 'your_secret_key', // Replace this with a strong random string
+  resave: false,
+  saveUninitialized: false
+}));
+
+// Serve homepage
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views', 'index.html'));
+});
+
+// Signup route
+app.post('/signup', async (req, res) => {
+  const { email, password } = req.body;
+  const hashed = await bcrypt.hash(password, 10);
+  try {
+    await pool.query('INSERT INTO users (email, password) VALUES ($1, $2)', [email, hashed]);
+    res.redirect('/');
+  } catch (err) {
+    res.status(500).send('Signup failed: ' + err.message);
   }
 });
 
-app.post("/auth/signup", async (req, res) => {
-  const { username, password } = req.body;
-  const result = await pool.query("INSERT INTO users(username, password) VALUES($1, $2)", [username, password]);
-  res.send("Signup successful!");
+// Login route
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+  const user = result.rows[0];
+  if (user && await bcrypt.compare(password, user.password)) {
+    req.session.userId = user.id;
+    res.redirect('/dashboard');
+  } else {
+    res.status(401).send('Invalid login');
+  }
 });
 
-// Expense route
-app.post("/expenses", async (req, res) => {
-  const { amount, description, date } = req.body;
-  await pool.query("INSERT INTO expenses(amount, description, date) VALUES($1, $2, $3)", [amount, description, date]);
-  res.send("Expense added!");
+// Dashboard route (secured)
+app.get('/dashboard', async (req, res) => {
+  if (!req.session.userId) return res.redirect('/');
+  res.send(`<h1>Welcome!</h1><p>More features coming soon...</p>`);
 });
 
-// Work hours route
-app.post("/workhours", async (req, res) => {
-  const { hours, date } = req.body;
-  await pool.query("INSERT INTO work_hours(hours, date) VALUES($1, $2)", [hours, date]);
-  res.send("Work hours logged!");
-});
-
-// Task route
-app.post("/tasks", async (req, res) => {
-  const { description, date } = req.body;
-  await pool.query("INSERT INTO tasks(description, date) VALUES($1, $2)", [description, date]);
-  res.send("Task added!");
-});
-
-// Workout route
-app.post("/workouts", async (req, res) => {
-  const { type, duration, date } = req.body;
-  await pool.query("INSERT INTO workouts(type, duration, date) VALUES($1, $2, $3)", [type, duration, date]);
-  res.send("Workout logged!");
+// Logout route
+app.get('/logout', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  });
 });
 
 // Start server
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
