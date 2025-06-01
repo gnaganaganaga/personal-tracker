@@ -2,151 +2,126 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nagavamsi Gade – Chartered Accountant | Resume</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tracker App</title>
   <style>
-    body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; margin: 0; padding: 0; }
-    header { background-color: #004080; color: #fff; padding: 20px; text-align: center; }
-    header h1 { margin: 0; font-size: 2em; }
-    header h2 { margin: 5px 0 15px; font-size: 1.2em; font-weight: normal; }
-    header p { margin: 0; }
-    a { color: #ffc107; text-decoration: none; }
-    section { padding: 20px; }
-    section:nth-child(even) { background-color: #eef6ff; }
-    h2 { color: #0066cc; border-bottom: 2px solid #0066cc; padding-bottom: 5px; }
-    h3 { color: #004080; margin-top: 15px; }
-    ul { margin: 10px 0 20px 20px; }
-    ul li { margin-bottom: 10px; }
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #f4f4f4;
+    }
+    form, .section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+      max-width: 400px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-top: 2rem;
+    }
+    input, button, select {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    h2 {
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
-  <!-- Header Section -->
-  <header>
-    <h1>Nagavamsi Gade</h1>
-    <h2>Chartered Accountant</h2>
-    <p>
-      <strong>Location:</strong> Chennai, Tamil Nadu &nbsp; | &nbsp;
-      <strong>Email:</strong> <a href="mailto:gnvamsi9@gmail.com">gnvamsi9@gmail.com</a> &nbsp; | &nbsp;
-      <strong>Phone:</strong> +91-8591301951 &nbsp; | &nbsp;
-      <strong>LinkedIn:</strong> <a href="https://linkedin.com/in/ca-nagavamsi" target="_blank">linkedin.com/in/ca-nagavamsi</a>
-    </p>
-  </header>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="text" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
 
-  <!-- Professional Summary / Objective -->
-  <section>
-    <h2>Professional Summary</h2>
-    <p>
-      Chartered Accountant with 7+ years of experience in finance, accounting, and automation. Skilled at driving process improvements, ensuring compliance, and delivering accurate financial reporting. Proficient in accounting software, developing automation workflows, and collaborating with teams to optimize AP, AR, Fixed Assets, Payroll, and GL functions. Seeking to leverage technical and analytical strengths in a dynamic finance role.
-    </p>
-  </section>
+  <h2>Signup</h2>
+  <form id="signupForm">
+    <input type="text" name="email" placeholder="Email" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <button type="submit">Signup</button>
+  </form>
 
-  <!-- Key Skills & Technical Skills -->
-  <section>
-    <h2>Key Skills & Technical Proficiencies</h2>
-    <!-- Core Accounting & Finance Skills -->
-    <h3>Accounting & Finance Expertise</h3>
-    <ul>
-      <li><strong>Accounts Payable:</strong> Invoice processing, vendor master maintenance, invoice matching, foreign remittances, internal controls, reconciliation, audit support.</li>
-      <li><strong>Accounts Receivable:</strong> Intercompany billing, GST invoicing, receivable collections, TDS certificate coordination, reconciliations.</li>
-      <li><strong>Fixed Assets Management:</strong> Asset capitalization, depreciation, lease accounting, impairment reviews, capex tracking.</li>
-      <li><strong>Payroll Management:</strong> Payroll processing, statutory filings (PF, PT, ESI, LWF, NPS, TDS), Form-16/A issuance.</li>
-      <li><strong>General Ledger:</strong> Balance sheet & P&L reconciliation, journal entries, monthly close, audit schedules.</li>
-      <li><strong>Audit & Reporting:</strong> Statutory & internal audits, financial statement audits for multiple industries.</li>
-      <li><strong>Process Improvement & SOP Development:</strong> Process documentation, SOP creation, policy recommendations, control enhancements.</li>
-    </ul>
+  <div class="section">
+    <h3>Add Expense</h3>
+    <form id="expenseForm">
+      <input type="number" step="0.01" name="amount" placeholder="Amount" required />
+      <input type="text" name="description" placeholder="Description" required />
+      <input type="date" name="date" />
+      <button type="submit">Add Expense</button>
+    </form>
+  </div>
 
-    <!-- Software & Automation Tools -->
-    <h3>Software & Automation Technologies</h3>
-    <ul>
-      <li><strong>Accounting Systems:</strong> Tally ERP9, QuickBooks, Zoho Office, SAP-FI/MM, Oracle Fusion Financials</li>
-      <li><strong>Business Intelligence:</strong> Power BI (dashboards, reporting)</li>
-      <li><strong>Programming & Scripting:</strong> Python (automation scripts), VBA macros (bulk processing)</li>
-      <li><strong>Office Productivity:</strong> Microsoft Office 365 (Excel advanced functions, pivot tables, Power Query)</li>
-      <li><strong>Automation Platforms:</strong> Web scraping, bulk PDF generation, automated email workflows</li>
-    </ul>
-  </section>
+  <div class="section">
+    <h3>Add Work Hours</h3>
+    <form id="workForm">
+      <input type="number" step="0.1" name="hours" placeholder="Hours Worked" required />
+      <input type="date" name="date" />
+      <button type="submit">Add Work Hours</button>
+    </form>
+  </div>
 
-  <!-- Automation Projects -->
-  <section>
-    <h2>Key Automation Projects</h2>
-    <ul>
-      <li>
-        <strong>Bulk PDF Generation & Distribution:</strong> Automated creation of password-protected PDFs and mass emailing of Form-16A using VBA and SMTP, reducing manual effort by 80%.
-      </li>
-      <li>
-        <strong>GST Inward Register Extraction:</strong> Developed Python scripts to parse airline invoices, extract HSN codes, and populate GST registers with 99% accuracy.
-      </li>
-      <li>
-        <strong>GST Mismatch Segregation:</strong> Created automation to split and route GST mismatch records by department, improving follow-up efficiency by 60%.
-      </li>
-      <li>
-        <strong>LDC Limit Utilization Capture:</strong> Built a web scraper for TRACES portal to log LDC limit data and update an Excel dashboard for real-time treasury monitoring.
-      </li>
-    </ul>
-  </section>
+  <div class="section">
+    <h3>Add Task</h3>
+    <form id="taskForm">
+      <input type="text" name="description" placeholder="Task Description" required />
+      <input type="date" name="date" />
+      <button type="submit">Add Task</button>
+    </form>
+  </div>
 
-  <!-- Professional Experience -->
-  <section>
-    <h2>Professional Experience</h2>
+  <div class="section">
+    <h3>Log Workout</h3>
+    <form id="workoutForm">
+      <input type="text" name="type" placeholder="Workout Type" required />
+      <input type="number" name="duration" placeholder="Duration (minutes)" required />
+      <input type="date" name="date" />
+      <button type="submit">Log Workout</button>
+    </form>
+  </div>
 
-    <!-- Combined Experience at DBS & ICICI -->
-    <div>
-      <h3>DBS Bank India Ltd & ICICI Bank Ltd – Finance & Taxation Functions</h3>
-      <p><em>September 2017 – Present</em></p>
-      <ul>
-        <li><strong>Accounts Payable:</strong> Managed vendor master data, invoice uploads and validations, PO matching, approval workflows, payment scheduling, and foreign remittance accounting. Ensured timely vendor settlements and query resolution.</li>
-        <li><strong>Accounts Receivable & Intercompany:</strong> Led intercompany billing, GST invoice generation, receivable tracking, collections, and reconciliation of intercompany balances. Coordinated with ICICI Group for policy-driven billing and adjustments.</li>
-        <li><strong>Fixed Assets Management:</strong> Maintained fixed asset register, ensured accurate capitalization, retirements, and transfers. Processed depreciation for both book and tax, conducted impairment reviews, and supported physical verification.</li>
-        <li><strong>General Ledger & Financial Reporting:</strong> Performed monthly reconciliations of GL, P&L analysis, provisioning, journal entries, and prepared detailed audit schedules. Supported statutory audits with comprehensive documentation.</li>
-        <li><strong>Taxation & Compliance:</strong> Filed TDS returns (26Q, 24Q, 27EQ), processed GSTR-1 and GSTR-2 reconciliations, managed Form-15CA submissions, and led GST mismatch resolution with business units and vendors.</li>
-        <li><strong>Payroll & Statutory Filings:</strong> Oversaw payroll execution, compliance with PF, PT, ESI, LWF, NPS, and TDS regulations. Issued Form-16 and Form-16A and managed employee reimbursements and payroll queries.</li>
-        <li><strong>SOP & Automation Initiatives:</strong> Drafted process SOPs, automated repetitive finance tasks (PDF generation, email workflows, reconciliations), and reduced manual effort by 50% through VBA and Python scripts.</li>
-        <li><strong>Regulatory Compliance & RoC:</strong> Filed MCA returns including incorporations, annual filings, authorized capital changes, and director modifications. Ensured ongoing corporate compliance and governance.</li>
-      </ul>
-    </div>
+  <script>
+    async function submitForm(id, url) {
+      const form = document.getElementById(id);
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(form));
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        alert(await res.text());
+        form.reset();
+      });
+    }
 
-    <!-- CA Apprenticeships -->
-    <div>
-      <h3>CA Apprenticeship – SPC & Associates / K Naresh Chandra & Co</h3>
-      <p><em>April 2014 – July 2017</em></p>
-      <ul>
-        <li>Assisted in statutory and tax audits for clients across software, retail, construction, and manufacturing sectors. Supported financial statement preparation and statutory return filings.</li>
-        <li>Participated in payroll processing, reimbursements, internal audits, and compliance audits. Drafted audit schedules and collaborated with client management on queries.</li>
-        <li>Filed RoC documentation: incorporations, annual returns, capital amendments, and company structural changes.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Education -->
-  <section>
-    <h2>Education & Certifications</h2>
-    <ul>
-      <li><strong>CA Final – Institute of Chartered Accountants of India</strong> (May 2017)</li>
-      <li><strong>B.Com – Kakatiya University</strong> (July 2015)</li>
-      <li><strong>Intermediate (10+2)</strong> (May 2012)</li>
-      <li><strong>SSC (10th Grade)</strong> (March 2010)</li>
-    </ul>
-  </section>
-
-  <!-- Achievements & Awards -->
-  <section>
-    <h2>Achievements & Awards</h2>
-    <ul>
-      <li><strong>ICICI Bank Super Achiever Award – 2019:</strong> For integrating E-Proc and i-Expense with SAP-IVIMS/SAP-FI/MM modules.</li>
-      <li><strong>Star of the Quarter Award:</strong> For excellence in process improvements and stakeholder management.</li>
-    </ul>
-  </section>
-
-  <!-- Additional Information -->
-  <section>
-    <h2>Additional Information</h2>
-    <ul>
-      <li><strong>Languages:</strong> English, Hindi, Telugu</li>
-      <li><strong>Date of Birth:</strong> June 1995</li>
-      <li><strong>Marital Status:</strong> Single</li>
-      <li><strong>Hobbies:</strong> Listening to Music, Playing Chess, Playing Cricket</li>
-      <li><strong>Address:</strong> Plot – 120 &amp; 121, Vanchinathan Street, Baby Nagar, Velachery, Chennai, Tamil Nadu - 600042</li>
-    </ul>
-  </section>
+    submitForm('loginForm', '/login');
+    submitForm('signupForm', '/signup');
+    submitForm('expenseForm', '/expenses');
+    submitForm('workForm', '/workhours');
+    submitForm('taskForm', '/tasks');
+    submitForm('workoutForm', '/workouts');
+  </script>
 </body>
 </html>
